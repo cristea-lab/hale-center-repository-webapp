@@ -1,0 +1,89 @@
+.logo-container{
+    padding 100px;
+    margin: 0;
+}
+.header-text {
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    margin: 20px;
+    display: inline;
+}
+
+.page-header {
+    font: small-caps 25px/30px Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.pancreas-image {
+    display: block;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    width = 30%;
+    
+}
+
+.welcome-text {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    font: 20px  Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+
+p {
+    font: 18px  Arial, sans-serif;
+}
+
+.header-subtext {
+    margin-left: 20px;
+    font: small-caps 25px/30px Arial, sans-serif;
+    display: inline;
+}
+nav {
+    margin: 30px 0;
+    height: 20px;
+    margin-top: 2%;
+    background: #fca103; 
+    padding: 10px 10px 15px 15px;
+}
+
+.body {
+    font-family: Arial, sans-serif;
+
+}
+
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #040212;
+    font: small-caps 25px/30px Arial, sans-serif;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+.logo {
+    margin-left: 5px;
+    float: left;
+    display: inline;
+    width: 90px;
+}
+
+
+
+.content {
+    padding: 20px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home Page{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='dfci-logo-only.png') }}", class="logo">
+        <div><h1 class="header-text">Pancreatic Cancer Data Repository</h1></div>
+        <div> <h3 class="header-subtext">10x single-cell GEX/TCR-seq from patients of pancreatic cancer sequenced at the Hale Family Center for Pancreatic Cancer Research</h3> </div>
+    </div>
+    <div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/explore-data">Explore Data</a>
+            <a href="/clinical-data">Clinical Data</a>
+            <a href="/data-download">Data Download</a>
+        </nav>
+    </div>
+    <div id="page-container">
+        {% block content %}
+        <!-- Content for different pages will be inserted here -->
+        {% endblock %}
+    </div>
+    {% block scripts %}
+    <!-- Additional scripts for specific pages can be inserted here -->
+    {% endblock %}
+</body>
+</html>
+
