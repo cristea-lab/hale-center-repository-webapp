@@ -8,7 +8,7 @@ import pandas as pd
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # Load data
-df = pd.read_excel("hale_center_repository/data/ClinicalData_PRAIII.xlsx")
+df = pd.read_excel("/var/www/hale-center-repository/hale_center_repository/data/ClinicalData_PRAIII.xlsx")
 options = {col: col.lower().replace(" ", "-") for col in df.columns}
 
 # Define column definitions for AG Grid

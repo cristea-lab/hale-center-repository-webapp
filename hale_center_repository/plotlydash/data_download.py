@@ -7,13 +7,13 @@ import pandas as pd
 
 from flask import send_file
 import os
-import zipfile
+import tarfile
 import tempfile
 
-BASE_DIR = "/Volumes/sdougan/PDAC_Data_Repository/cellranger_processed_data"
+BASE_DIR = "/var/www/hale-center-repository/hale_center_repository/data/cellranger_processed_matrices/"
 
 # Load data
-df = pd.read_excel("hale_center_repository/data/PRAIII_Data_Download.xlsx")
+df = pd.read_excel("/var/www/hale-center-repository/hale_center_repository/data/PRAIII_Data_Download.xlsx")
 options = {col: col.lower().replace(" ", "-") for col in df.columns}
 
 # Define column definitions for AG Grid
@@ -71,21 +71,20 @@ def init_callbacks(dash_app):
 
         # Create a temporary directory to store the files to be zipped
         with tempfile.TemporaryDirectory() as tmpdirname:
-            zip_path = os.path.join(tmpdirname, 'pdac_data_repository.zip')
-
-            with zipfile.ZipFile(zip_path, 'w') as zipf:
+            tar_path = os.path.join(tmpdirname, 'HaleCenter_DataDownload.tar')		
+            with tarfile.open(tar_path, 'w') as tarf:
                 for dataset_id in selected_dataset_ids:
                     dataset_dir = os.path.join(BASE_DIR, dataset_id)
                     dataset_dir = dataset_dir.replace(" ", "")
-                    print(os.path.exists(dataset_dir))
-                    print(dataset_dir.split(" "))
                     if os.path.exists(dataset_dir):
+                        print(os.listdir(dataset_dir))
                         for root, dirs, files in os.walk(dataset_dir):
                             for file in files:
+                                print(file)
                                 file_path = os.path.join(root, file)
                                 arcname = os.path.relpath(file_path, BASE_DIR)
-                                zipf.write(file_path, arcname)
+                                tarf.add(file_path, arcname)
 
             # Return the zip file for download
-            return dcc.send_file(zip_path, filename="pdac_data_repository.zip")
+            return dcc.send_file(tar_path, filename="HaleCenter_DataDownload.tar")
 
