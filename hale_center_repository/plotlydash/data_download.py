@@ -29,6 +29,20 @@ column_defs.extend([
     } for i in df.columns
 ])
 
+def generate_dropdowns(df):
+    dropdowns = []
+    for column in df.columns:
+        yield html.Div([
+            html.Label(f"{column}:"),
+            dcc.Dropdown(
+                id = f"{column}-filter",
+                options=[{'label': str(i), 'value': i} for i in df[column].unique()],
+                value=None,
+                multi=True,
+                placeholder=f"Select {column.lower()}s to filter"
+            )
+        ])
+
 def init_data_download(server):
     dash_app = dash.Dash(
         server=server,
@@ -42,16 +56,22 @@ def init_data_download(server):
             dcc.Download(id="download-zip"),
             html.Div(),
             dbc.Row([
+                dbc.Row([
+                        dbc.Col(html.Div([
+                            dropdown
+                        ], style={"padding": "10px"}))
+                    for dropdown in generate_dropdowns(df)
+                ]),
                 dbc.Col([
                     dag.AgGrid(
                         rowData=df.to_dict('records'),
-                        style={"padding": '15px 50px 5px 50px', "height": 800, "width": 1700},
+                        style={"padding": '15px 50px 5px 50px', "height": 800, "width": 1500},
                         dashGridOptions={"rowSelection": "multiple", "animateRows": False},
                         columnDefs=column_defs,
                         defaultColDef={'filter': True},
                         id='grid'
                     )
-                ], width='3')
+                ], width=3),
             ]),
         ])
     ])
@@ -59,6 +79,18 @@ def init_data_download(server):
     return dash_app.server
 
 def init_callbacks(dash_app):
+
+    @dash_app.callback(
+        Output('grid', 'rowData'),
+        [Input(f'{column}-filter', 'value') for column in df.columns],
+    )
+    def update_table(*filters):
+        filtered_df = df
+        for i, column in enumerate(df.columns):
+            if filters[i]:
+                filtered_df = filtered_df[filtered_df[column].isin(filters[i])]
+        return filtered_df.to_dict('records')
+
     @dash_app.callback(
         Output("download-zip", "data"),
         Input("download-button", "n_clicks"),
