@@ -6,8 +6,8 @@ The Hale Center repository is a resource for data download and exploration of sa
 
 The website components are integrated using Flask, which is a Python web framework. Some of these components are written in R (i.e. Data Exploration) and some are written in Dash (i.e. Clinical Data and Data Download). The format of the website repository follows the "Flask Application Factory" pattern which is nicely explained here: https://hackersandslackers.com/flask-application-factory/. Briefly, the structure of the repository is as follows:
 
-  #### hale-center-repository:
-        - activate_venv.sh => a Bash script that is called upon deployment, that activates the Python virtual environment with all the packages required for the website to run.
+  #### hale-center-repository
+  - activate_venv.sh => a Bash script that is called upon deployment, that activates the Python virtual environment with all the packages required for the website to run.
         - wsgi.py => creates the Flask app object by calling the "init_app()" function from "hale_center_repository/__init__.py". 
   #### hale_center_repository:
       This directory follows the structure of pretty much any typical Flask app, where the Dash files and HTML files are stored separately in subfolders. The structure is briefly described below:
