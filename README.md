@@ -19,7 +19,7 @@ The website components are integrated using Flask, which is a Python web framewo
 
 The website has 4 subpages or tabs: Home, Clinical Data, Data Exploration, and Data Download. 
 
-#### Website Deployment
+### Website Deployment
 
 The website has been deployed on a VM instance that was created by DFCI ITS department specifically for this website. On the VM, apache2 was used to deploy the website. Apache2 is a type of software that runs on a server computer. Its primary job is to handle requests from web browsers and deliver web content, such as websites, images, and videos, to users over the internet. The following website explains how to deploy a Flask app using Apache2: https://www.opensourceforu.com/2023/03/deploying-a-flask-application-via-the-apache-server/. 
 
